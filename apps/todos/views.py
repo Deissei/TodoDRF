@@ -25,6 +25,10 @@ class TodoCreateAPIView(CreateAPIView):
     serializer_class = TodoCreateSerializer
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        return serializer.save(author=self.request.user)
+
+
 
 class TodoFinishListAPIView(ListAPIView):
     serializer_class = TodoListSerializer
